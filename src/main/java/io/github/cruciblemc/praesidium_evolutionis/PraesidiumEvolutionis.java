@@ -7,14 +7,12 @@ import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.ModContainer;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.event.FMLServerStoppedEvent;
-import cpw.mods.fml.relauncher.CoreModManager;
 import io.github.cruciblemc.omniconfig.api.OmniconfigAPI;
 import io.github.cruciblemc.praesidium_evolutionis.api.ReflectionHelper;
 import io.github.cruciblemc.praesidium_evolutionis.api.scheduler.SchedulerManager;
 import io.github.cruciblemc.praesidium_evolutionis.api.tracking.TileTracking;
 import io.github.cruciblemc.praesidium_evolutionis.config.CommonConfig;
 import lombok.SneakyThrows;
-import net.minecraftforge.classloading.FMLForgePlugin;
 import net.minecraftforge.common.MinecraftForge;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -52,10 +50,11 @@ public class PraesidiumEvolutionis {
 
         SchedulerManager.init();
 
-        if (FMLForgePlugin.RUNTIME_DEOBF || CommonConfig.debugging_enabled) {
+        if (CommonConfig.debugging_enabled) {
             var devEvents = new DevEventListener();
             MinecraftForge.EVENT_BUS.register(devEvents);
             FMLCommonHandler.instance().bus().register(devEvents);
+            logger.info("register dev listener");
         }
     }
 
