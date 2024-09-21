@@ -34,9 +34,6 @@ public abstract class MixinTileEntity implements TrackableTileEntity {
     Identification ownerIdentification = IdentificationManager.nobody();
 
     @Shadow
-    public abstract void markDirty();
-
-    @Shadow
     public abstract World getWorld();
 
     @Override
@@ -47,7 +44,6 @@ public abstract class MixinTileEntity implements TrackableTileEntity {
     @Override
     public void setOwner(Identification owner) {
         ownerIdentification = owner;
-        markDirty();
     }
 
     @Override
